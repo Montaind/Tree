@@ -32,6 +32,36 @@ private:
 			}
 		}
 	}
+
+	void del(Node* current, T data) {
+		if (current->data == data) {
+			if (current->left == nullptr && current->right == nullptr) {
+				current->parent = nullptr;
+				delete current;
+			}
+			if (current->left == nullptr && current->right != nullptr) {
+				current->parent = nullptr;
+				current->right = nullptr;
+				delete current;
+			}
+			if (current->left != nullptr && current->right == nullptr) {
+				current->parent = nullptr;
+				current->left = nullptr;
+				delete current;
+			}
+			
+			if (current->left != nullptr && current->left != nullptr) {
+				current->parent = nullptr;
+				current->left = nullptr;
+			}
+		}
+		if (current->data < data) {
+			del(current->right, data);
+		}
+		if (current->data > data) {
+			del(current - left, data);
+		}
+	}
 private:
 	class Node {
 	public:
